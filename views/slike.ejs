@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="image gallery">
+  <meta name="keywords" content="gallery">
+  <link rel="stylesheet" href="/style/style.css">
+  <title>LV1_img_gallery</title>
+</head>
+<body>
+
+  <h1>Galerija slika</h1>
+
+  <section class="gallery">
+    <% images.forEach(image => { %>
+      <figure>
+        <img src="<%= image.url %>" alt="<%= image.title %>" onclick="openModal(this)">
+        <figcaption><%= image.title %></figcaption>
+      </figure>
+    <% }); %>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
+
+  <script>
+    function openModal(img) {
+      const modal = document.getElementById("myModal");
+      const modalImg = document.getElementById("img01");
+      const captionText = document.getElementById("caption");
+
+      modal.style.display = "block";
+      modalImg.src = img.src;
+      captionText.innerHTML = img.alt;
+    }
+
+    document.querySelector(".close").onclick = function () {
+      document.getElementById("myModal").style.display = "none";
+    }
+
+    document.getElementById("myModal").onclick = function (event) {
+      if (event.target === this) {
+        this.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
